@@ -20,7 +20,19 @@ addBookToLibrary.prototype = book;
 const theBook = new book('theBook', 'theAuthor', '100', 'read');
 const aBook = new book('aBook', 'theAuthor', '100', 'read');
 
-console.log(theBook.info());
+// console.log(theBook.info());
 console.log(myLibrary);
+
+const newBookDialog = document.querySelector("dialog");
+const newBookButton = document.querySelector(".add-book > button");
+const cancelButton = document.querySelector("dialog button");
+
+newBookButton.addEventListener("click", () => {
+    newBookDialog.showModal();
+});
+
+cancelButton.addEventListener("click",() => {
+    newBook.close();
+});
 
   
