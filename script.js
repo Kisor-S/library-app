@@ -46,5 +46,6 @@ confirmButton.addEventListener("click", () => {
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
     console.log(title, author, pages);
+    newBookDialog.close();
 });
 
