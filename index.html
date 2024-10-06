@@ -13,7 +13,7 @@
       </div>
       <div class="add-book">
         <button>New Book</button>
-        <dialog>
+        <dialog id="new-book-dialog">
           <p>Add New Book</p>
           <form method="dialog">
             <label for="title">Title</label>
@@ -23,10 +23,10 @@
             <input type="text" id="author" name="author" />
 
             <label for="pages">No.of.Pages</label>
-            <input type="text" id="pages" name="pages" />
+            <input type="number" id="pages" name="pages" />
 
             <button autofocus>Cancel</button>
-            <button type="button">Confirm</button>
+            <button type="button" id="confirm-button">Confirm</button>
           </form>
         </dialog>
       </div>

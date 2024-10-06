@@ -32,7 +32,19 @@ newBookButton.addEventListener("click", () => {
 });
 
 cancelButton.addEventListener("click",() => {
-    newBook.close();
+    newBookDialog.close();
 });
 
-  
+const addNewBookDialog = document.getElementById("new-book-dialog")
+let title = document.getElementById("title").value;
+let author = document.getElementById("author").value;
+let pages = document.getElementById("pages").value;
+const confirmButton = addNewBookDialog.querySelector("#confirm-button");
+
+confirmButton.addEventListener("click", () => {
+    title = document.getElementById("title").value;
+    author = document.getElementById("author").value;
+    pages = document.getElementById("pages").value;
+    console.log(title, author, pages);
+});
+
