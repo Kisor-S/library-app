@@ -54,7 +54,18 @@ confirmButton.addEventListener("click", () => {
     let card = document.createElement("div");
     cardContainer.appendChild(card).className = "card";
 
-    
+    let showTitle = document.createElement("h2");
+    showTitle.innerHTML = title;
+    card.appendChild(showTitle);
+
+    let showAuthor = document.createElement("p");
+    showAuthor.innerHTML = ("Author: " + author);
+    card.appendChild(showAuthor);
+
+    let showPages = document.createElement("p");
+    showPages.innerHTML = ("Pages : " + pages);
+    card.appendChild(showPages);
+
     newBookDialog.close();
 });
 
