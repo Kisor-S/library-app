@@ -46,6 +46,15 @@ confirmButton.addEventListener("click", () => {
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
     console.log(title, author, pages);
+
+    let cardContainer = document.createElement("div");
+    cardContainer.classList.add("container");
+    newBookButton.after(cardContainer);
+
+    let card = document.createElement("div");
+    cardContainer.appendChild(card).className = "card";
+
+    
     newBookDialog.close();
 });
 
