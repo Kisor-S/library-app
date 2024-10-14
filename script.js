@@ -1,4 +1,5 @@
 const myLibrary = [];
+let flag = 0;
 
 function book(name, author, pages, status) {
     this.name = name;
@@ -12,7 +13,7 @@ function book(name, author, pages, status) {
 }
 
 function addBookToLibrary(book) {
-    myLibrary.push(`name: ${book.name}, author: ${book.author}, pages: ${book.pages}, status: ${book.status}`);
+    myLibrary.push({name: book.name, author: book.author, pages: book.pages, status: book.status});
 }
 
 addBookToLibrary.prototype = book;
@@ -33,12 +34,7 @@ cancelButton.addEventListener("click",() => {
 });
 
 const addNewBookDialog = document.getElementById("new-book-dialog")
-// let title = document.getElementById("title").value;
-// let author = document.getElementById("author").value;
-// let pages = document.getElementById("pages").value;
-// let readStatus = document.getElementById("read").checked;
 const confirmButton = addNewBookDialog.querySelector("#confirm-button");
-title = 0;
 
 
 newBookButton.addEventListener("click", () => {
@@ -48,50 +44,58 @@ newBookButton.addEventListener("click", () => {
 
 confirmButton.addEventListener("click", () => {
 
-let title = document.getElementById("title").value;
-let author = document.getElementById("author").value;
-let pages = document.getElementById("pages").value;
-let readStatus = document.getElementById("read").checked;
-
 const newBook = new book(document.getElementById("title").value, document.getElementById("author").value, 
                         document.getElementById("pages").value, document.getElementById("read").checked );
+    displayMyLibrary();
+    newBookDialog.close();
+});
 
+displayMyLibrary();
 
-    // title = document.getElementById("title").value;
-    // author = document.getElementById("author").value;
-    // pages = document.getElementById("pages").value;
-    // readStatus = document.getElementById("read").checked;
-    // console.log(title, author, pages);
-
+function displayMyLibrary() {
     let cardContainer = document.createElement("div");
     cardContainer.classList.add("container");
     newBookButton.after(cardContainer);
 
-    let card = document.createElement("div");
-    cardContainer.appendChild(card).className = "card";
+    if(flag == 0){
+        myLibrary.forEach(function(item){
 
-    let showTitle = document.createElement("h2");
-    showTitle.innerHTML = title;
-    card.appendChild(showTitle);
+            let card = document.createElement("div");
+            cardContainer.appendChild(card).className = "card";
+    
+            let showName = document.createElement("h2");
+            showName.innerHTML = item.name;
+            card.appendChild(showName);
+    
+            let showAuthor = document.createElement("p");
+            showAuthor.innerHTML = ("Author: " + item.author);
+            card.appendChild(showAuthor);
+    
+            let showPages = document.createElement("p");
+            showPages.innerHTML = ("Pages : " + item.pages);
+            card.appendChild(showPages);
 
-    let showAuthor = document.createElement("p");
-    showAuthor.innerHTML = ("Author: " + author);
-    card.appendChild(showAuthor);
-
-    let showPages = document.createElement("p");
-    showPages.innerHTML = ("Pages : " + pages);
-    card.appendChild(showPages);
-
-    let showReadStatus = document.createElement("p");
-    if(readStatus === true){
-        showReadStatus.innerHTML = ("Read : Yes");
-        card.appendChild(showReadStatus);
+            flag = 1;
+        })
     }
+
     else {
-        showReadStatus.innerHTML = ("Read : No");
-        card.appendChild(showReadStatus);
+        for(let i = myLibrary.length - 1; i < myLibrary.length; i++){
+
+            let card = document.createElement("div");
+            cardContainer.appendChild(card).className = "card";
+    
+            let showName = document.createElement("h2");
+            showName.innerHTML = myLibrary[i].name;
+            card.appendChild(showName);
+    
+            let showAuthor = document.createElement("p");
+            showAuthor.innerHTML = ("Author: " + myLibrary[i].author);
+            card.appendChild(showAuthor);
+    
+            let showPages = document.createElement("p");
+            showPages.innerHTML = ("Pages : " + myLibrary[i].pages);
+            card.appendChild(showPages);
+        }
     }
-
-    newBookDialog.close();
-});
-
+}
