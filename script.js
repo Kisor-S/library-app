@@ -28,6 +28,10 @@ const newBookDialog = document.querySelector("dialog");
 const newBookButton = document.querySelector(".add-book > button");
 const cancelButton = document.querySelector("dialog button");
 
+let cardContainer = document.createElement("div");
+cardContainer.classList.add("container");
+newBookButton.after(cardContainer);
+
 
 cancelButton.addEventListener("click",() => {
     newBookDialog.close();
@@ -53,27 +57,24 @@ const newBook = new book(document.getElementById("title").value, document.getEle
 displayMyLibrary();
 
 function displayMyLibrary() {
-    let cardContainer = document.createElement("div");
-    cardContainer.classList.add("container");
-    newBookButton.after(cardContainer);
 
     if(flag == 0){
         myLibrary.forEach(function(item){
 
-            let card = document.createElement("div");
-            cardContainer.appendChild(card).className = "card";
+            let defaultCards = document.createElement("div");
+            cardContainer.appendChild(defaultCards);
     
             let showName = document.createElement("h2");
             showName.innerHTML = item.name;
-            card.appendChild(showName);
+            defaultCards.appendChild(showName);
     
             let showAuthor = document.createElement("p");
             showAuthor.innerHTML = ("Author: " + item.author);
-            card.appendChild(showAuthor);
+            defaultCards.appendChild(showAuthor);
     
             let showPages = document.createElement("p");
             showPages.innerHTML = ("Pages : " + item.pages);
-            card.appendChild(showPages);
+            defaultCards.appendChild(showPages);
 
             flag = 1;
         })
@@ -83,7 +84,7 @@ function displayMyLibrary() {
         for(let i = myLibrary.length - 1; i < myLibrary.length; i++){
 
             let card = document.createElement("div");
-            cardContainer.appendChild(card).className = "card";
+            cardContainer.appendChild(card);
     
             let showName = document.createElement("h2");
             showName.innerHTML = myLibrary[i].name;
