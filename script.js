@@ -27,25 +27,41 @@ const newBookDialog = document.querySelector("dialog");
 const newBookButton = document.querySelector(".add-book > button");
 const cancelButton = document.querySelector("dialog button");
 
-newBookButton.addEventListener("click", () => {
-    newBookDialog.showModal();
-});
 
 cancelButton.addEventListener("click",() => {
     newBookDialog.close();
 });
 
 const addNewBookDialog = document.getElementById("new-book-dialog")
+// let title = document.getElementById("title").value;
+// let author = document.getElementById("author").value;
+// let pages = document.getElementById("pages").value;
+// let readStatus = document.getElementById("read").checked;
+const confirmButton = addNewBookDialog.querySelector("#confirm-button");
+title = 0;
+
+
+newBookButton.addEventListener("click", () => {
+    newBookDialog.showModal();
+    document.querySelector("#new-book-form").reset();
+});
+
+confirmButton.addEventListener("click", () => {
+
 let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
-const confirmButton = addNewBookDialog.querySelector("#confirm-button");
+let readStatus = document.getElementById("read").checked;
 
-confirmButton.addEventListener("click", () => {
-    title = document.getElementById("title").value;
-    author = document.getElementById("author").value;
-    pages = document.getElementById("pages").value;
-    console.log(title, author, pages);
+const newBook = new book(document.getElementById("title").value, document.getElementById("author").value, 
+                        document.getElementById("pages").value, document.getElementById("read").checked );
+
+
+    // title = document.getElementById("title").value;
+    // author = document.getElementById("author").value;
+    // pages = document.getElementById("pages").value;
+    // readStatus = document.getElementById("read").checked;
+    // console.log(title, author, pages);
 
     let cardContainer = document.createElement("div");
     cardContainer.classList.add("container");
@@ -65,6 +81,16 @@ confirmButton.addEventListener("click", () => {
     let showPages = document.createElement("p");
     showPages.innerHTML = ("Pages : " + pages);
     card.appendChild(showPages);
+
+    let showReadStatus = document.createElement("p");
+    if(readStatus === true){
+        showReadStatus.innerHTML = ("Read : Yes");
+        card.appendChild(showReadStatus);
+    }
+    else {
+        showReadStatus.innerHTML = ("Read : No");
+        card.appendChild(showReadStatus);
+    }
 
     newBookDialog.close();
 });
