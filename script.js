@@ -18,8 +18,8 @@ function addBookToLibrary(book) {
 
 addBookToLibrary.prototype = book;
 
-const theBook = new book('theBook', 'theAuthor', '100', 'read');
-const aBook = new book('aBook', 'theAuthor', '100', 'read');
+const theBook = new book('theBook', 'theAuthor', '100', 'yes');
+const aBook = new book('aBook', 'theAuthor', '100', 'no');
 
 // console.log(theBook.info());
 console.log(myLibrary);
@@ -76,6 +76,16 @@ function displayMyLibrary() {
             showPages.innerHTML = ("Pages : " + item.pages);
             defaultCards.appendChild(showPages);
 
+            let showStatus = document.createElement("p");
+            if(item.status == 'yes') {
+                showStatus.innerHTML = ("Read : Yes");
+                defaultCards.appendChild(showStatus);
+            }
+            else {
+                showStatus.innerHTML = ("Read : No");
+                defaultCards.appendChild(showStatus);
+            }
+
             flag = 1;
         })
     }
@@ -97,6 +107,16 @@ function displayMyLibrary() {
             let showPages = document.createElement("p");
             showPages.innerHTML = ("Pages : " + myLibrary[i].pages);
             card.appendChild(showPages);
+
+            let showStatus = document.createElement("p");
+            if(myLibrary[i].status == true) {
+                showStatus.innerHTML = ("Read : Yes");
+                card.appendChild(showStatus);
+            }
+            else {
+                showStatus.innerHTML = ("Read : No");
+                card.appendChild(showStatus);
+            }
         }
     }
 }
