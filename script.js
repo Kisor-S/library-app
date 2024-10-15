@@ -18,8 +18,8 @@ function addBookToLibrary(book) {
 
 addBookToLibrary.prototype = book;
 
-const theBook = new book('theBook', 'theAuthor', '100', 'yes');
-const aBook = new book('aBook', 'theAuthor', '100', 'no');
+const theBook = new book('Building a Second Brain', 'Tiago Forte', '272', 'yes');
+const aBook = new book('The Mountain is You', 'Brianna Wiest', '248', 'no');
 
 // console.log(theBook.info());
 console.log(myLibrary);
@@ -48,8 +48,8 @@ newBookButton.addEventListener("click", () => {
 
 confirmButton.addEventListener("click", () => {
 
-const newBook = new book(document.getElementById("title").value, document.getElementById("author").value, 
-                        document.getElementById("pages").value, document.getElementById("read").checked );
+    new book(document.getElementById("title").value, document.getElementById("author").value, 
+            document.getElementById("pages").value, document.getElementById("read").checked );
     displayMyLibrary();
     newBookDialog.close();
 });
@@ -62,7 +62,8 @@ function displayMyLibrary() {
         myLibrary.forEach(function(item){
 
             let defaultCards = document.createElement("div");
-            cardContainer.appendChild(defaultCards);
+            defaultCards.dataset.index = myLibrary.indexOf(item);
+            cardContainer.appendChild(defaultCards).id = myLibrary.indexOf(item);
     
             let showName = document.createElement("h2");
             showName.innerHTML = item.name;
@@ -86,6 +87,20 @@ function displayMyLibrary() {
                 defaultCards.appendChild(showStatus);
             }
 
+            let removeButton = document.createElement("button");
+            removeButton.innerHTML = "Remove";
+            removeButton.dataset.index = myLibrary.indexOf(item)
+            defaultCards.appendChild(removeButton);
+
+            removeButton.addEventListener("click", () => {
+                cardContainer.removeChild(document.getElementById(myLibrary.indexOf(item)));
+                myLibrary.splice(myLibrary.indexOf(item), 1);
+            });
+
+            let toggleButton = document.createElement("button");
+            toggleButton.innerHTML = "Toggle Read";
+            defaultCards.appendChild(toggleButton);
+
             flag = 1;
         })
     }
@@ -94,7 +109,8 @@ function displayMyLibrary() {
         for(let i = myLibrary.length - 1; i < myLibrary.length; i++){
 
             let card = document.createElement("div");
-            cardContainer.appendChild(card);
+            card.dataset.index = i;
+            cardContainer.appendChild(card).id = i;
     
             let showName = document.createElement("h2");
             showName.innerHTML = myLibrary[i].name;
@@ -117,6 +133,15 @@ function displayMyLibrary() {
                 showStatus.innerHTML = ("Read : No");
                 card.appendChild(showStatus);
             }
+
+            let removeButton = document.createElement("button");
+            removeButton.innerHTML = "Remove";
+            card.appendChild(removeButton);
+
+            removeButton.addEventListener("click", () => {
+                cardContainer.removeChild(document.getElementById(i));
+                myLibrary.splice(i,1);
+            })
         }
     }
 }
