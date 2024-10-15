@@ -101,6 +101,8 @@ function displayMyLibrary() {
             toggleButton.innerHTML = "Toggle Read";
             defaultCards.appendChild(toggleButton);
 
+            toggleButton.addEventListener
+
             flag = 1;
         })
     }
@@ -142,6 +144,11 @@ function displayMyLibrary() {
                 cardContainer.removeChild(document.getElementById(i));
                 myLibrary.splice(i,1);
             })
+
+            let toggleButton = document.createElement("button");
+            toggleButton.innerHTML = "Toggle Read";
+            card.appendChild(toggleButton);
+
         }
     }
 }
