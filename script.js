@@ -1,5 +1,4 @@
 const myLibrary = [];
-let flag = 0;
 
 function book(name, author, pages, status) {
     this.name = name;
@@ -18,24 +17,15 @@ function addBookToLibrary(book) {
 
 addBookToLibrary.prototype = book;
 
-const theBook = new book('Building a Second Brain', 'Tiago Forte', '272', 'yes');
-const aBook = new book('The Mountain is You', 'Brianna Wiest', '248', 'no');
+const theBook = new book('Building a Second Brain', 'Tiago Forte', '272', true);
+const aBook = new book('The Mountain is You', 'Brianna Wiest', '248', false);
 
-// console.log(theBook.info());
 console.log(myLibrary);
 
 const newBookDialog = document.querySelector("dialog");
-const newBookButton = document.querySelector(".add-book > button");
+const newBookButton = document.querySelector("#new-book-button");
 const cancelButton = document.querySelector("dialog button");
 
-let cardContainer = document.createElement("div");
-cardContainer.classList.add("container");
-newBookButton.after(cardContainer);
-
-
-cancelButton.addEventListener("click",() => {
-    newBookDialog.close();
-});
 
 const addNewBookDialog = document.getElementById("new-book-dialog")
 const confirmButton = addNewBookDialog.querySelector("#confirm-button");
@@ -54,101 +44,70 @@ confirmButton.addEventListener("click", () => {
     newBookDialog.close();
 });
 
-displayMyLibrary();
+cancelButton.addEventListener("click",() => {
+    newBookDialog.close();
+});
 
 function displayMyLibrary() {
 
-    if(flag == 0){
-        myLibrary.forEach(function(item){
+    const bookList = document.getElementById('book-list');
+    bookList.textContent = '';
 
-            let defaultCards = document.createElement("div");
-            defaultCards.dataset.index = myLibrary.indexOf(item);
-            cardContainer.appendChild(defaultCards).id = myLibrary.indexOf(item);
-    
-            let showName = document.createElement("h2");
-            showName.innerHTML = item.name;
-            defaultCards.appendChild(showName);
-    
-            let showAuthor = document.createElement("p");
-            showAuthor.innerHTML = ("Author: " + item.author);
-            defaultCards.appendChild(showAuthor);
-    
-            let showPages = document.createElement("p");
-            showPages.innerHTML = ("Pages : " + item.pages);
-            defaultCards.appendChild(showPages);
+    myLibrary.forEach((book, index) => {
 
-            let showStatus = document.createElement("p");
-            if(item.status == 'yes') {
-                showStatus.innerHTML = ("Read : Yes");
-                defaultCards.appendChild(showStatus);
-            }
-            else {
-                showStatus.innerHTML = ("Read : No");
-                defaultCards.appendChild(showStatus);
-            }
+        let bookCard = document.createElement("div");
+        bookCard.dataset.index = index;
+        bookCard.classList.add('book-card')
+        
+        let showName = document.createElement("h2");
+        showName.innerHTML = book.name;
+        bookCard.appendChild(showName);
 
-            let removeButton = document.createElement("button");
-            removeButton.innerHTML = "Remove";
-            removeButton.dataset.index = myLibrary.indexOf(item)
-            defaultCards.appendChild(removeButton);
+        let showAuthor = document.createElement("p");
+        showAuthor.innerHTML = ("Author: " + book.author);
+        bookCard.appendChild(showAuthor);
 
-            removeButton.addEventListener("click", () => {
-                cardContainer.removeChild(document.getElementById(myLibrary.indexOf(item)));
-                myLibrary.splice(myLibrary.indexOf(item), 1);
-            });
+        let showPages = document.createElement("p");
+        showPages.innerHTML = ("Pages : " + book.pages);
+        bookCard.appendChild(showPages);
 
-            let toggleButton = document.createElement("button");
-            toggleButton.innerHTML = "Toggle Read";
-            defaultCards.appendChild(toggleButton);
-
-            toggleButton.addEventListener
-
-            flag = 1;
-        })
-    }
-
-    else {
-        for(let i = myLibrary.length - 1; i < myLibrary.length; i++){
-
-            let card = document.createElement("div");
-            card.dataset.index = i;
-            cardContainer.appendChild(card).id = i;
-    
-            let showName = document.createElement("h2");
-            showName.innerHTML = myLibrary[i].name;
-            card.appendChild(showName);
-    
-            let showAuthor = document.createElement("p");
-            showAuthor.innerHTML = ("Author: " + myLibrary[i].author);
-            card.appendChild(showAuthor);
-    
-            let showPages = document.createElement("p");
-            showPages.innerHTML = ("Pages : " + myLibrary[i].pages);
-            card.appendChild(showPages);
-
-            let showStatus = document.createElement("p");
-            if(myLibrary[i].status == true) {
-                showStatus.innerHTML = ("Read : Yes");
-                card.appendChild(showStatus);
-            }
-            else {
-                showStatus.innerHTML = ("Read : No");
-                card.appendChild(showStatus);
-            }
-
-            let removeButton = document.createElement("button");
-            removeButton.innerHTML = "Remove";
-            card.appendChild(removeButton);
-
-            removeButton.addEventListener("click", () => {
-                cardContainer.removeChild(document.getElementById(i));
-                myLibrary.splice(i,1);
-            })
-
-            let toggleButton = document.createElement("button");
-            toggleButton.innerHTML = "Toggle Read";
-            card.appendChild(toggleButton);
-
+        let showStatus = document.createElement("p");
+        if(book.status == true) {
+            showStatus.innerHTML = ("Read : Yes");
+            bookCard.appendChild(showStatus);
         }
-    }
+        else {
+            showStatus.innerHTML = ("Read : No");
+            bookCard.appendChild(showStatus);
+        }
+
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        bookCard.appendChild(removeButton);
+
+        removeButton.addEventListener("click", () => {
+            myLibrary.splice(index, 1);
+            displayMyLibrary();
+        });
+
+        let toggleButton = document.createElement("button");
+        toggleButton.innerHTML = "Toggle Read";
+        bookCard.appendChild(toggleButton);
+
+        toggleButton.addEventListener("click", () => {
+            if(book.status == true) {
+                book.status = false;
+                showStatus.innerHTML = ("Read : No");
+            }
+            else {
+                book.status = true;
+                showStatus.innerHTML = ("Read : Yes");
+            }
+        });
+
+        bookList.appendChild(bookCard);
+
+    })
 }
+
+displayMyLibrary();
