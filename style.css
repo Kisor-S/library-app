@@ -4,3 +4,22 @@
     box-sizing: border-box;
 }
 
+body {
+    padding: 2em;
+    /* background-color: #f3f4f6; */
+    background-color: #3b82f6;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 5em;
+    margin-bottom: 1em;
+    border-radius: 1em;
+}
+
+.title {
+    color: #eff6ff;
+}
+
