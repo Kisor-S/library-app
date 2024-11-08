@@ -81,6 +81,28 @@ function displayMyLibrary() {
             bookCard.appendChild(showStatus);
         }
 
+        let toggleButton = document.createElement("button");
+        if(book.status == true) {
+            toggleButton.innerHTML = "Mark Unread";
+        }
+        else {
+            toggleButton.innerHTML = "Mark Read";
+        }
+        bookCard.appendChild(toggleButton);
+
+        toggleButton.addEventListener("click", () => {
+            if(book.status == true) {
+                book.status = false;
+                showStatus.innerHTML = ("Read : No");
+                toggleButton.innerHTML = "Mark Read";
+            }
+            else {
+                book.status = true;
+                showStatus.innerHTML = ("Read : Yes");
+                toggleButton.innerHTML = "Mark Unread";
+            }
+        });
+
         let removeButton = document.createElement("button");
         removeButton.innerHTML = "Remove";
         bookCard.appendChild(removeButton);
@@ -88,21 +110,6 @@ function displayMyLibrary() {
         removeButton.addEventListener("click", () => {
             myLibrary.splice(index, 1);
             displayMyLibrary();
-        });
-
-        let toggleButton = document.createElement("button");
-        toggleButton.innerHTML = "Toggle Read";
-        bookCard.appendChild(toggleButton);
-
-        toggleButton.addEventListener("click", () => {
-            if(book.status == true) {
-                book.status = false;
-                showStatus.innerHTML = ("Read : No");
-            }
-            else {
-                book.status = true;
-                showStatus.innerHTML = ("Read : Yes");
-            }
         });
 
         bookList.appendChild(bookCard);
