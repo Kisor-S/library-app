@@ -7,19 +7,31 @@
 body {
     padding: 2em;
     /* background-color: #f3f4f6; */
-    background-color: #3b82f6;
+    background-color: #d1d5db;
 }
 
 header {
     display: flex;
     flex-direction: column;
     padding: 1em;
-    gap: 5em;
+    gap: 4em;
     margin-bottom: 1em;
     border-radius: 1em;
 }
 
 .title {
+    color: #020617;
+}
+
+#new-book-button {
+    width: 8em;
+    height: 2.5em;
+    border-radius: 1em;
+    border: none;
+    background-color: #ea580c;
     color: #eff6ff;
+    font-size: 1em;
+    font-weight: bolder;
+    margin-bottom: 2em;
 }
 
