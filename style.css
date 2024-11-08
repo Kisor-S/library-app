@@ -35,3 +35,20 @@ header {
     margin-bottom: 2em;
 }
 
+#book-list {
+    display: flex;
+    gap: 2em;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    Width: 15em;
+    gap: 1em;
+    background-color: #eff6ff;
+    padding: 1em;
+    border-radius: 0.75em;
+    /* border: 1px solid #020617; */
+    border-left: 0.2em solid #ea580c;
+}
